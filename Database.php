@@ -15,7 +15,7 @@ class Database
 
 	public static function connect()
 	{
-		// code...
+		// 
 		try {
 			self::$connection = new PDO ("mysql:host=". self::$dbHost . ";dbname=". self::$dbName.";charset=utf8mb4",self::$dbUser,self::$dbPassword);
 
@@ -23,6 +23,7 @@ class Database
 			die($e->getMessage());
 		}
 		return self::$connection;
+
 	}
 
 	public static function disconnect(){
