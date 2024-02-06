@@ -80,7 +80,7 @@
 
                                 <a href="about.php" class="nav-item nav-link">About</a>
 
-                                <a href="service.php" class="nav-item nav-link">Services</a>
+                                <a href="room_description.php" class="nav-item nav-link">Details</a>
 
                                 <a href="room.php" class="nav-item nav-link">Rooms</a>
 

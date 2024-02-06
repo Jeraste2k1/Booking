@@ -1,3 +1,13 @@
+<?php
+require("Database.php");
+$db = Database::connect();
+$id = $_GET["id"];
+$data = $db->prepare("SELECT * from chambre where idchambre=?");
+
+$data->execute(array($id));
+$data = $data->fetch(PDO::FETCH_ASSOC);
+
+?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -30,7 +40,7 @@
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">  
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 
 
@@ -74,7 +84,7 @@
 
         <!-- Header Start -->
 
-        <?php include('header.php')?>
+        <?php include('header.php') ?>
 
         <!-- Header End -->
 
@@ -90,7 +100,7 @@
 
                 <div class="container text-center pb-5">
 
-                    <h1 class="display-3 text-white mb-3 animated slideInDown">Services</h1>
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">Details</h1>
 
                     <nav aria-label="breadcrumb">
 
@@ -100,7 +110,7 @@
 
                             <li class="breadcrumb-item"><a href="#">Pages</a></li>
 
-                            <li class="breadcrumb-item text-white active" aria-current="page">Services</li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Details</li>
 
                         </ol>
 
@@ -136,9 +146,7 @@
 
                                     <div class="date" id="date1" data-target-input="nearest">
 
-                                        <input type="text" class="form-control datetimepicker-input"
-
-                                            placeholder="Check in" data-target="#date1" data-toggle="datetimepicker" />
+                                        <input type="text" class="form-control datetimepicker-input" placeholder="Check in" data-target="#date1" data-toggle="datetimepicker" />
 
                                     </div>
 
@@ -148,7 +156,7 @@
 
                                     <div class="date" id="date2" data-target-input="nearest">
 
-                                        <input type="text" class="form-control datetimepicker-input" placeholder="Check out" data-target="#date2" data-toggle="datetimepicker"/>
+                                        <input type="text" class="form-control datetimepicker-input" placeholder="Check out" data-target="#date2" data-toggle="datetimepicker" />
 
                                     </div>
 
@@ -218,146 +226,62 @@
 
                 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
 
-                    <h6 class="section-title text-center text-primary text-uppercase">Our Services</h6>
+                    <h6 class="section-title text-center text-primary text-uppercase">Détails</h6>
 
-                    <h1 class="mb-5">Explore Our <span class="text-primary text-uppercase">Services</span></h1>
+                    <h1 class="mb-5">Détails <span class="text-primary text-uppercase">chambres</span></h1>
 
                 </div>
 
                 <div class="row g-4">
+                    <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
 
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="room-item shadow rounded overflow-hidden w-full">
 
-                        <a class="service-item rounded" href="">
+                            <div class="position-relative">
 
-                            <div class="service-icon bg-transparent border rounded p-1">
+                                <img class="img-fluid" src="img/room-1.jpg" alt="" >
 
-                                <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
-
-                                    <i class="fa fa-hotel fa-2x text-primary"></i>
-
-                                </div>
+                                <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4"><?= $data["prixbynight"] ?>F/Night</small>
 
                             </div>
 
-                            <h5 class="mb-3">Rooms & Appartment</h5>
+                            <div class="p-4 mt-2">
 
-                            <p class="text-body mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                                <div class="d-flex justify-content-between mb-3">
 
-                        </a>
+                                    <h5 class="mb-0"><?= $data["typechambre"] ?></h5>
 
-                    </div>
+                                    <div class="ps-2">
 
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+                                        <small class="fa fa-star text-primary"></small>
 
-                        <a class="service-item rounded" href="">
+                                        <small class="fa fa-star text-primary"></small>
 
-                            <div class="service-icon bg-transparent border rounded p-1">
+                                        <small class="fa fa-star text-primary"></small>
 
-                                <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
+                                        <small class="fa fa-star text-primary"></small>
 
-                                    <i class="fa fa-utensils fa-2x text-primary"></i>
+                                        <small class="fa fa-star text-primary"></small>
 
-                                </div>
-
-                            </div>
-
-                            <h5 class="mb-3">Food & Restaurant</h5>
-
-                            <p class="text-body mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
-
-                        </a>
-
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-
-                        <a class="service-item rounded" href="">
-
-                            <div class="service-icon bg-transparent border rounded p-1">
-
-                                <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
-
-                                    <i class="fa fa-spa fa-2x text-primary"></i>
+                                    </div>
 
                                 </div>
 
-                            </div>
+                                <div class="d-flex mb-3">
 
-                            <h5 class="mb-3">Spa & Fitness</h5>
 
-                            <p class="text-body mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
-
-                        </a>
-
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
-
-                        <a class="service-item rounded" href="">
-
-                            <div class="service-icon bg-transparent border rounded p-1">
-
-                                <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
-
-                                    <i class="fa fa-swimmer fa-2x text-primary"></i>
+                                    <small><i class="fa fa-wifi text-primary me-2"></i>Numéro de chambre : <?= $data["numchambre"] ?></small>
 
                                 </div>
 
-                            </div>
+                                <p class="text-body mb-3">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
 
-                            <h5 class="mb-3">Sports & Gaming</h5>
-
-                            <p class="text-body mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
-
-                        </a>
-
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-
-                        <a class="service-item rounded" href="">
-
-                            <div class="service-icon bg-transparent border rounded p-1">
-
-                                <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
-
-                                    <i class="fa fa-glass-cheers fa-2x text-primary"></i>
-
-                                </div>
 
                             </div>
 
-                            <h5 class="mb-3">Event & Party</h5>
-
-                            <p class="text-body mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
-
-                        </a>
+                        </div>
 
                     </div>
-
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
-
-                        <a class="service-item rounded" href="">
-
-                            <div class="service-icon bg-transparent border rounded p-1">
-
-                                <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
-
-                                    <i class="fa fa-dumbbell fa-2x text-primary"></i>
-
-                                </div>
-
-                            </div>
-
-                            <h5 class="mb-3">GYM & Yoga</h5>
-
-                            <p class="text-body mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
-
-                        </a>
-
-                    </div>
-
                 </div>
 
             </div>
@@ -490,13 +414,13 @@
 
         <!-- Newsletter Start -->
 
-        
+
 
 
 
         <!-- Footer Start -->
 
-        <?php include('footer.php')?>
+        <?php include('footer.php') ?>
 
         <!-- Footer End -->
 

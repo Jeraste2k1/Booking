@@ -8,17 +8,23 @@
     require ('Database.php');
     $db = Database::connect();
 
+    $idchambre=$_GET["id"];
+    $data=$db->prepare("SELECT * from chambre where idchambre=? ");
+    $data->execute(array($idchambre));
+    $data=$data->fetch(PDO::FETCH_ASSOC);
+
     if(isset($_POST["submit"])){
         $numchambre =control($_POST["numchambre"]); 
         $typechambre =control($_POST["typechambre"]); 
         $prixbynight =control($_POST["prixbynight"]); 
         $statut=control($_POST["statut"]); 
         
-        $save = $db->prepare ("INSERT INTO chambre(numchambre, typechambre, prixbynight, statut) VALUES (?, ?, ?, ?)");
-        $result = $save->execute(array($numchambre, $typechambre, $prixbynight, $statut)); 
+        $save = $db->prepare ("UPDATE chambre SET numchambre=?, typechambre=?, prixbynight=?, statut=? WHERE idchambre= ?");
+        $result = $save->execute(array($numchambre, $typechambre, $prixbynight, $statut,$idchambre )); 
 
         if($result){
             echo "Effectué";
+            header("location:index.php");
         } else {
             echo "Échec";
         }
@@ -116,34 +122,6 @@
 
         <!-- Page Header Start -->
 
-        <div class="container-fluid page-header mb-5 p-0" style="background-image: url(img/carousel-1.jpg);">
-
-            <div class="container-fluid page-header-inner py-5">
-
-                <div class="container text-center pb-5">
-
-                    <h1 class="display-3 text-white mb-3 animated slideInDown">Our Team</h1>
-
-                    <nav aria-label="breadcrumb">
-
-                        <ol class="breadcrumb justify-content-center text-uppercase">
-
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-
-                            <li class="breadcrumb-item"><a href="#">Pages</a></li>
-
-                            <li class="breadcrumb-item text-white active" aria-current="page">Our Team</li>
-
-                        </ol>
-
-                    </nav>
-
-                </div>
-
-            </div>
-
-        </div>
-
         <!-- Page Header End -->
 
 
@@ -163,7 +141,7 @@
         <style>
     .container {
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-       
+        margin-top:20px;
         width: 50%; /* Définit la largeur de la div container à 50% */
     }
 
@@ -173,26 +151,26 @@
         margin-top:5px;
     }
 </style>
-        <div class="container py-5 pb-5">
+        <div class="container py-5 pb-5 ">
 
         
     <div class=" fadeInUp" data-wow-delay="0.1s">
     <form action="" method="post">
             <div class="form-group">
                 <label for="numchambre">Numero : </label>
-                <input type="text" class="form-control" id="num" name="numchambre" aria-describedby="" placeholder="Numéro de chambre" required>
+                <input type="text" class="form-control" id="num" name="numchambre" aria-describedby="" placeholder="Numéro de chambre" value="<?=$data["numchambre"]?>" required>
             </div>
             <div class="form-group">
                 <label for=" typechambre">Type : </label>
-                <input type="text" class="form-control" id=" typee" name="typechambre" aria-describedby="" placeholder="Type de chambre" required>
+                <input type="text" class="form-control" id=" typee" name="typechambre" aria-describedby="" placeholder="Type de chambre" value="<?=$data["typechambre"]?>" required>
             </div>
             <div class="form-group">
                 <label for="prixbynight">Prix/nuit : </label>
-                <input type="text" class="form-control" id="prix" name="prixbynight" aria-describedby="" placeholder="Prix/nuit" required>
+                <input type="text" class="form-control" id="prix" name="prixbynight" aria-describedby="" placeholder="Prix/nuit" value="<?=$data["prixbynight"]?>" required>
             </div>
             <div class="form-group">
                 <label for="statut">Statut</label> 
-                <input type="text" class="form-control" id="statut" name="statut" aria-describedby="" placeholder="Statut de la chambre" required>
+                <input type="text" class="form-control" id="statut" name="statut" aria-describedby="" placeholder="Statut de la chambre" value="<?=$data["statut"]?>" required>
             </div>
 
             <input type="submit" name="submit" value="enregistrer" class="btn btn-primary text-center mt-2">

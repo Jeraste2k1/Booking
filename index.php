@@ -446,13 +446,13 @@ $data->execute();
 
                                 </div>
 
-                                <p class="text-body mb-3">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                                <p class="text-body mb-3">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem. <a href="modify.php?id=<?= $row["idchambre"]?>"> <span class="fa fa-pen"></a></span> </p>
 
                                 <div class="d-flex justify-content-between">
 
-                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">View Detail</a>
+                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="room_description.php?id=<?= $row["idchambre"]?>">Detail</a>
 
-                                    <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Book Now</a>
+                                    <a class="btn btn-sm btn-dark rounded py-2 px-4" href="booking.php">Reservation</a>
 
                                 </div>
 
